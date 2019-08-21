@@ -1,0 +1,55 @@
+<html>
+  <input id="btn1" type="button" value="GetData" (click)="getdata()">
+
+
+
+
+<br>
+<br>
+
+<body>
+  <div>
+     <p title = "obj.title">This is first paragraph.</p>
+     <p id = "myid">This is second paragraph.</p>
+     <div id = "divid"></div>
+  </div>
+</body>
+
+
+<table border="5" width = "700" *ngIf="flag1" id="t">
+<thead>
+  <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>author</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let o of obj"  >
+
+    <td *ngIf="flag || o.id !== idEditable">{{o.id}}</td>  <!-- 1 -->
+    <td *ngIf="!flag && o.id === idEditable"><!--2-->
+        {{o.id}}
+    </td>   
+
+    <td *ngIf="flag || o.id !== idEditable">{{o.title}}</td> <!-- 1 -->
+    <td *ngIf="!flag && o.id === idEditable">
+        <input [(ngModel)]="title" name="title" type="text" >  <!-- 2 -->
+    </td>
+
+    <td *ngIf="flag || o.id !== idEditable">{{o.author}}</td> <!-- 1 -->
+    <td *ngIf="!flag && o.id === idEditable">
+        <input [(ngModel)]="author" name="author" type="text" >  <!-- 2-->
+    </td>
+
+    <button id="b1" (click)="onClick(o.id,o.title,o.author)" *ngIf="change(o.id)"> {{Button_name}} </button>  <!-- 1 -->
+      
+    <button id="button2" (click)="onDelete(o.id)" *ngIf="flag">Delete</button><!--1-->
+  </tr>
+</tbody>
+</table>
+
+
+
+<router-outlet></router-outlet>
+</html>
